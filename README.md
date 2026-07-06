@@ -95,14 +95,4 @@ journalctl -u fiverr_bot.service -n 20 --no-pager
 This project is licensed under the MIT License — feel free to modify, distribute, and use it for commercial or personal automation workflows.
 
 
----
 
-### Як його оновити прямо з терміналу через Neovim:
-1. Відкрий файл: `nvim README.md`
-2. Очисти старий вміст (якщо він є) і встав цей текст.
-3. Збережи та вийди: `:wq`
-4. Закинь зміни на GitHub:
-   ```bash
-   git add README.md
-   git commit -m "docs: upgrade README with systemd instructions"
-   git push origin main

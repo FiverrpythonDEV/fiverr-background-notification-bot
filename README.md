@@ -31,3 +31,78 @@ fiverr-background-notification-bot/
 ├── .gitignore       # Protection file ensuring no local tokens are committed
 ├── LICENSE          # MIT Open Source License
 └── README.md        # Comprehensive system documentation
+
+🚀 Installation & Deployment
+1. Clone the repository
+Bash
+
+git clone [https://github.com/FiverrpythonDEV/fiverr-background-notification-bot.git](https://github.com/FiverrpythonDEV/fiverr-background-notification-bot.git)
+cd fiverr-background-notification-bot
+
+2. Configure Environment Variables
+
+Create a persistent environment file or pass variables to your runtime environment:
+Bash
+
+export BOT_TOKEN="your_telegram_bot_token"
+export CHAT_ID="your_telegram_chat_id"
+export FIVERR_COOKIE="your_secure_fiverr_session_cookie"
+
+3. Setup Systemd Daemon (24/7 Background Run)
+
+To ensure the script runs non-stop without keeping a terminal open, deploy it as a system service:
+
+    Create a service file:
+    Bash
+
+    sudo nano /etc/systemd/system/fiverr_bot.service
+
+    Paste the configuration:
+    Ini, TOML
+
+    [Unit]
+    Description=Fiverr Background Notification Bot Daemon
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=root
+    WorkingDirectory=/path/to/your/bot
+    ExecStart=/usr/bin/python3 /path/to/your/bot/main.py
+    Restart=always
+    RestartSec=5
+    Environment="BOT_TOKEN=your_token" "CHAT_ID=your_id" "Fiverr_COOKIE=your_cookie"
+
+    [Install]
+    WantedBy=multi-user.target
+
+    Enable and start the daemon:
+    Bash
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable fiverr_bot.service
+    sudo systemctl start fiverr_bot.service
+
+4. Check Runtime Logs
+
+To monitor the system execution and verify the web scraping loops:
+Bash
+
+journalctl -u fiverr_bot.service -n 20 --no-pager
+
+📄 License
+
+This project is licensed under the MIT License — feel free to modify, distribute, and use it for commercial or personal automation workflows.
+
+
+---
+
+### Як його оновити прямо з терміналу через Neovim:
+1. Відкрий файл: `nvim README.md`
+2. Очисти старий вміст (якщо він є) і встав цей текст.
+3. Збережи та вийди: `:wq`
+4. Закинь зміни на GitHub:
+   ```bash
+   git add README.md
+   git commit -m "docs: upgrade README with systemd instructions"
+   git push origin main
